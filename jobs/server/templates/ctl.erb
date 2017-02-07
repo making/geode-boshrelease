@@ -1,0 +1,35 @@
+#!/bin/bash
+
+JOB_NAME=server
+RUN_DIR=/var/vcap/data/${JOB_NAME}
+LOG_DIR=/var/vcap/sys/log/${JOB_NAME}
+JOB_DIR=/var/vcap/jobs/${JOB_NAME}
+PIDFILE=${RUN_DIR}/vf.gf.${JOB_NAME}.pid
+
+export JAVA_HOME=/var/vcap/packages/java
+export GEODE_HOME=/var/vcap/packages/geode
+
+export PATH=${JAVA_HOME}/bin:${GEODE_HOME}/bin:$PATH
+
+
+
+case $1 in
+  start)
+    mkdir -p ${RUN_DIR} ${LOG_DIR}
+    chown -R vcap:vcap ${RUN_DIR} ${LOG_DIR}
+
+    chpst -u vcap:vcap gfsh start server --name=`hostname` \
+      --dir=${RUN_DIR}                                     \
+      --server-port=<%= p("server.port") %>                \
+      --cache-xml-file=${JOB_DIR}/cache.xml                \
+      --locators=<%= link('locator').instances.map { |x| x.address + '[' + link('locator').p('locator.port').to_s + ']' }.join(',')  %> &>> ${LOG_DIR}/${JOB_NAME}.log
+    ;;
+
+  stop)
+    kill -9 `cat ${PIDFILE}`
+    rm -f $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+esac

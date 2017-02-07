@@ -1,0 +1,24 @@
+---
+name: locator
+
+templates:
+  ctl.erb: bin/ctl
+
+packages:
+- java
+- geode
+
+consumes:
+- name: locator
+  type: discovery
+
+provides:
+- name: locator
+  type: discovery
+  properties:
+  - locator.port
+
+properties:
+  locator.port:
+    description: "Port on which locator is listening"
+    default: 10334

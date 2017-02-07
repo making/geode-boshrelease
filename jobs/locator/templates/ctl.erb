@@ -1,0 +1,32 @@
+#!/bin/bash
+
+JOB_NAME=locator
+RUN_DIR=/var/vcap/data/${JOB_NAME}
+LOG_DIR=/var/vcap/sys/log/${JOB_NAME}
+PIDFILE=${RUN_DIR}/vf.gf.${JOB_NAME}.pid
+
+export JAVA_HOME=/var/vcap/packages/java
+export GEODE_HOME=/var/vcap/packages/geode
+
+export PATH=${JAVA_HOME}/bin:${GEODE_HOME}/bin:$PATH
+
+
+
+case $1 in
+  start)
+    mkdir -p ${RUN_DIR} ${LOG_DIR}
+    chown -R vcap:vcap ${RUN_DIR} ${LOG_DIR}
+
+    chpst -u vcap:vcap gfsh start locator --name=`hostname` \
+      --dir=${RUN_DIR}                                      \
+      --port=<%= p("locator.port") %> &>> ${LOG_DIR}/${JOB_NAME}.log
+    ;;
+
+  stop)
+    kill -9 `cat ${PIDFILE}`
+    rm -f $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+esac

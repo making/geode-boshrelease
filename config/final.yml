@@ -1,0 +1,5 @@
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/geode
+final_name: geode

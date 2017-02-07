@@ -1,0 +1,28 @@
+---
+name: server
+
+templates:
+  ctl.erb: bin/ctl
+  cache.xml.erb: cache.xml
+
+packages:
+- java
+- geode
+
+consumes:
+- name: locator
+  type: discovery
+  properties:
+  - locator.port
+
+provides:
+- name: server
+  type: client
+
+properties:
+  server.port:
+    description: "Port for client connections"
+    default: 40404
+  region.name:
+    description: "Region name"
+    default: "myRegion"
