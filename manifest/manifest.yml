@@ -1,6 +1,8 @@
 ---
 name: geode
 
+director_uuid: <%= `bosh status --uuid` %>
+
 releases:
 - name: geode
   version: latest
