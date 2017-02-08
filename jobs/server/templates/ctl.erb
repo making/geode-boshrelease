@@ -19,6 +19,7 @@ case $1 in
     chown -R vcap:vcap ${RUN_DIR} ${LOG_DIR}
 
     chpst -u vcap:vcap gfsh start server --name=`hostname` \
+      --mcast-port=0                                       \
       --dir=${RUN_DIR}                                     \
       --server-port=<%= p("server.port") %>                \
       --cache-xml-file=${JOB_DIR}/cache.xml                \
