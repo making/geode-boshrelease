@@ -12,7 +12,6 @@ bosh create release --name geode --force && bosh upload release && bosh -n -d ma
 New CLI
 
 ```
-VERSION=0.0.1
 bosh create-release --name=geode --force && bosh -e vbox upload-release && bosh -e vbox -n -d geode deploy manifest/manifest.yml
 ```
 
