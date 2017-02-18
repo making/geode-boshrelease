@@ -17,7 +17,7 @@ export BOSH_ENVIRONMENT=192.168.50.6
 ```
 
 ```
-bosh create-release --name=geode --force && bosh -e vbox upload-release && bosh -e vbox -n -d geode deploy manifest/manifest.yml
+bosh create-release --name=geode --force && bosh upload-release && bosh -n -d geode deploy manifest/manifest.yml
 ```
 
 ### Create release tarball
