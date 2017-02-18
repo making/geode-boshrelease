@@ -33,8 +33,8 @@ Configure [manifest/manifest.yml](manifest/manifest.yml) for your environment.
 
 ```
 VERSION=0.0.1
-bosh -e vbox upload-release https://github.com/making/geode-boshrelease/releases/download/${VERSION}/geode-boshrelease-${VERSION}.tgz
-bosh -e vbox -n -d geode deploy manifest/manifest.yml
+bosh upload-release https://github.com/making/geode-boshrelease/releases/download/${VERSION}/geode-boshrelease-${VERSION}.tgz
+bosh -n -d geode deploy manifest/manifest.yml
 ```
 
 ## Old CLI (might work)
