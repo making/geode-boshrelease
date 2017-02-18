@@ -18,8 +18,8 @@ case $1 in
     chown -R vcap:vcap ${STORE_DIR} ${LOG_DIR}
 
     chpst -u vcap:vcap gfsh start locator --name=`hostname` \
-      --max-heap=<%= p("locator.vm_memory") %>m                                       \
-      --initial-heap=<%= p("locator.vm_memory") %>m                                   \
+      --max-heap=<%= p("locator.vm_memory") %>m             \
+      --initial-heap=<%= p("locator.vm_memory") %>m         \
       --dir=${STORE_DIR}                                    \
       --port=<%= p("locator.port") %> &>> ${LOG_DIR}/${JOB_NAME}.log
     ;;
