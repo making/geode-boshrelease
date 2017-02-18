@@ -20,26 +20,26 @@ update:
 
 instance_groups:
 - name: locator
-  azs: [az1]
+  azs: [z1]
   instances: 1
   jobs:
   - name: locator
     release: geode
     properties: {}
-  vm_type: small
+  vm_type: default
   stemcell: ubuntu
-  persistent_disk_type: '10240'
+  persistent_disk_type: default
   networks:
-  - name: ert
+  - name: default
 - name: server
-  azs: [az1]
+  azs: [z1]
   instances: 3
   jobs:
   - name: server
     release: geode
     properties: {}
-  vm_type: small
+  vm_type: default
   stemcell: ubuntu
-  persistent_disk_type: '10240'
+  persistent_disk_type: default
   networks:
-  - name: ert
+  - name: default
