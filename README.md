@@ -1,5 +1,6 @@
 # Apache Geode BOSH Release
 
+Note that this release is developed with [BOSH CLI v2](http://bosh.io/docs/cli-v2.html).
 
 ## In development
 
