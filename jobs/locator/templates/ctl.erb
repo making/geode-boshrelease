@@ -21,7 +21,8 @@ case $1 in
       --max-heap=<%= p("locator.vm_memory") %>m             \
       --initial-heap=<%= p("locator.vm_memory") %>m         \
       --dir=${STORE_DIR}                                    \
-      --port=<%= p("locator.port") %> &>> ${LOG_DIR}/${JOB_NAME}.log
+      --port=<%= p("locator.port") %>                       \
+      --locators=<%= link('locator').instances.map { |x| x.address + '[' + link('locator').p('locator.port').to_s + ']' }.join(',')  %> &>> ${LOG_DIR}/${JOB_NAME}.log
     ;;
 
   stop)
