@@ -4,16 +4,16 @@ wget https://download.run.pivotal.io/openjdk-jdk/trusty/x86_64/openjdk-1.8.0_121
 wget https://archive.apache.org/dist/incubator/geode/1.0.0-incubating/apache-geode-1.0.0-incubating.tar.gz
 ```
 
-### Old CLI
+### New CLI
+
+```
+bosh add-blob --dir=.. openjdk-1.8.0_121.tar.gz java 
+bosh add-blob --dir=.. apache-geode-1.0.0-incubating.tar.gz geode 
+```
+
+### Old CLI (might work)
 
 ```
 bosh add blob openjdk-1.8.0_121.tar.gz java
 bosh add blob apache-geode-1.0.0-incubating.tar.gz geode
-```
-
-### New CLI
-
-```
-bosh -e vbox add-blob --dir=.. openjdk-1.8.0_121.tar.gz java 
-bosh -e vbox add-blob --dir=.. apache-geode-1.0.0-incubating.tar.gz geode 
 ```
