@@ -49,6 +49,7 @@ bosh create release --name geode --force && bosh upload release && bosh -n -d ma
 
 ```
 bosh create release --name=geode --version=${VERSION} --final --with-tarball --force 
+```
 
 ### Deploy Geode Cluster
 
