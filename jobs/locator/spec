@@ -22,3 +22,6 @@ properties:
   locator.port:
     description: "Port on which locator is listening"
     default: 10334
+  locator.vm_memory:
+    description: "RAM allocated to the locator VM in MB"
+    default: 512

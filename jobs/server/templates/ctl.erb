@@ -11,7 +11,23 @@ export GEODE_HOME=/var/vcap/packages/geode
 
 export PATH=${JAVA_HOME}/bin:${GEODE_HOME}/bin:$PATH
 
+# calculate the JVM heap size
 
+INSTANCE_MEMORY=$( awk '/MemTotal/ {print int($2 / 1024)}' /proc/meminfo )
+AVAILABLE_MEMORY=$( awk '/MemAvailable/ {print int($2 / 1024)}' /proc/meminfo )
+
+if [ "$INSTANCE_MEMORY" -lt 8192 ]
+then
+  JVM_MEM=$((INSTANCE_MEMORY * 9 / 10))
+else
+  JVM_MEM=$((INSTANCE_MEMORY - 1024))
+fi
+
+if [ "$AVAILABLE_MEMORY" -lt "$JVM_MEM" ]
+then
+  JVM_MEM=$(($AVAILABLE_MEMORY * 9 / 10))
+  echo "WARNING: available memory ($AVAILABLE_MEMORY) is less than you have tried to allocate for geode ($JVM_MEM). Dropping down to use 90% of available mem instead."
+fi
 
 case $1 in
   start)
@@ -21,6 +37,8 @@ case $1 in
     chpst -u vcap:vcap gfsh start server --name=`hostname` \
       --mcast-port=0                                       \
       --dir=${STORE_DIR}                                   \
+      --max-heap="$JVM_MEM"m                               \
+      --initial-heap="$JVM_MEM"m                           \
       --server-port=<%= p("server.port") %>                \
       --cache-xml-file=${JOB_DIR}/cache.xml                \
       --locators=<%= link('locator').instances.map { |x| x.address + '[' + link('locator').p('locator.port').to_s + ']' }.join(',')  %> &>> ${LOG_DIR}/${JOB_NAME}.log
