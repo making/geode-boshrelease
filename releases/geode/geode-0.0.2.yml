@@ -1,0 +1,24 @@
+name: geode
+version: 0.0.2
+commit_hash: 01ce654
+uncommitted_changes: true
+jobs:
+- name: locator
+  version: 01cad18f175847422709dc87c1cc08ecae57ddce
+  fingerprint: 01cad18f175847422709dc87c1cc08ecae57ddce
+  sha1: 5054933b287ed5fa2bd6b6c3b99e43c03a9250b3
+- name: server
+  version: f8af67b31818ac9ac21e39d8766e00b6ba2dcf21
+  fingerprint: f8af67b31818ac9ac21e39d8766e00b6ba2dcf21
+  sha1: afb1935d0a7cf5666d2f1775904e4837b0774662
+packages:
+- name: geode
+  version: 61c2b347d3fc28b469a42056f6543386e5e55afc
+  fingerprint: 61c2b347d3fc28b469a42056f6543386e5e55afc
+  sha1: 8e02951d3ea791d19879454095575f55053c60e7
+  dependencies: []
+- name: java
+  version: f4ef2b7f1ba86ead193135a371f2908c0d4f532d
+  fingerprint: f4ef2b7f1ba86ead193135a371f2908c0d4f532d
+  sha1: db575de655668c75e903b47b2d172837d7e08e88
+  dependencies: []

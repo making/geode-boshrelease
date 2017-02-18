@@ -4,4 +4,4 @@ name: geode
 dependencies: []
 
 files:
-- geode
+- geode/apache-geode-1.0.0-incubating.tar.gz

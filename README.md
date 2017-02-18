@@ -23,7 +23,7 @@ bosh create-release --name=geode --force && bosh upload-release && bosh -n -d ge
 ### Create release tarball
 
 ```
-VERSION=0.0.1
+VERSION=0.0.2
 bosh create-release --name=geode --version=${VERSION} --final --tarball=geode-boshrelease-${VERSION}.tgz --force
 ```
 
@@ -32,7 +32,7 @@ bosh create-release --name=geode --version=${VERSION} --final --tarball=geode-bo
 Configure [manifest/manifest.yml](manifest/manifest.yml) for your environment.
 
 ```
-VERSION=0.0.1
+VERSION=0.0.2
 bosh upload-release https://github.com/making/geode-boshrelease/releases/download/${VERSION}/geode-boshrelease-${VERSION}.tgz
 bosh -n -d geode deploy manifest/manifest.yml
 ```
