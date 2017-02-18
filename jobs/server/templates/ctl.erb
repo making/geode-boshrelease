@@ -1,10 +1,10 @@
 #!/bin/bash
 
 JOB_NAME=server
-RUN_DIR=/var/vcap/data/${JOB_NAME}
+STORE_DIR=/var/vcap/store/${JOB_NAME}
 LOG_DIR=/var/vcap/sys/log/${JOB_NAME}
 JOB_DIR=/var/vcap/jobs/${JOB_NAME}
-PIDFILE=${RUN_DIR}/vf.gf.${JOB_NAME}.pid
+PIDFILE=${STORE_DIR}/vf.gf.${JOB_NAME}.pid
 
 export JAVA_HOME=/var/vcap/packages/java
 export GEODE_HOME=/var/vcap/packages/geode
@@ -15,12 +15,12 @@ export PATH=${JAVA_HOME}/bin:${GEODE_HOME}/bin:$PATH
 
 case $1 in
   start)
-    mkdir -p ${RUN_DIR} ${LOG_DIR}
-    chown -R vcap:vcap ${RUN_DIR} ${LOG_DIR}
+    mkdir -p ${STORE_DIR} ${LOG_DIR}
+    chown -R vcap:vcap ${STORE_DIR} ${LOG_DIR}
 
     chpst -u vcap:vcap gfsh start server --name=`hostname` \
       --mcast-port=0                                       \
-      --dir=${RUN_DIR}                                     \
+      --dir=${STORE_DIR}                                   \
       --server-port=<%= p("server.port") %>                \
       --cache-xml-file=${JOB_DIR}/cache.xml                \
       --locators=<%= link('locator').instances.map { |x| x.address + '[' + link('locator').p('locator.port').to_s + ']' }.join(',')  %> &>> ${LOG_DIR}/${JOB_NAME}.log

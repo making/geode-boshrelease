@@ -1,5 +1,5 @@
 check process server
-  with pidfile /var/vcap/data/server/vf.gf.server.pid
+  with pidfile /var/vcap/store/server/vf.gf.server.pid
   start program "/var/vcap/jobs/server/bin/ctl start" with timeout 180 seconds
   stop program "/var/vcap/jobs/server/bin/ctl stop" with timeout 180 seconds
   group vcap
